@@ -18,8 +18,10 @@ def ConstantContinousCost(Cost):
         return True
     
     def shift(self, num: float, unit: str) -> None:
-        # For actually continous costs
+        # For continous costs, the time shift has no effect
         pass
     
     def in_period(self, start: pd.Timestamp, end: pd.Timestamp) -> float:
         return self.cost * (end - start).total_seconds() / pd.Timedelta("1s").total_seconds()
+    
+    
