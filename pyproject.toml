@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "ulieconomics"
+version = "0.1.0"
+description = "Code-driven financial planning"
+authors = ["Uli Köhler <github@techoverflow.net>"]
+license = "Apache License v2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "^2.2.2"
+numpy = "^1.26.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
