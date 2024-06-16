@@ -14,7 +14,7 @@ class ConstantContinousCost(Cost):
         self.currency = currency
         if isinstance(per, str):
             # per="month" etc
-            per = pd.Timedelta(1, unit=per)
+            per = pd.Timedelta(1, per)
         # Store input arguments (more or less) for copying this instance
         self.cost = cost
         self.per = per
