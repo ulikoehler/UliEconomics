@@ -66,3 +66,6 @@ class CombinedCost(Cost):
     
     def __repr__(self) -> str:
         return f"CombinedCost({self.name}: {', '.join(cost.__repr__() for cost in self.costs)}))"
+    
+    def sub_costs(self) -> List[Cost]:
+        return []

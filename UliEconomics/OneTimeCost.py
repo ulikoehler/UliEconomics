@@ -2,7 +2,7 @@
 from .Cost import Cost
 import pandas as pd
 from .Interval import Interval
-
+from typing import List
 class OneTimeCost(Cost):
     """
     Represents a cost which occurs exactly once at a specific point in time,
@@ -61,3 +61,6 @@ class OneTimeCost(Cost):
     
     def __repr__(self) -> str:
         return f"OneTimeCost({self.__str__()})"
+    
+    def sub_costs(self) -> List[Cost]:
+        return []

@@ -2,6 +2,7 @@
 from abc import ABC, abstractmethod
 import pandas as pd
 from .Interval import Interval
+from typing import List
 
 class Cost(ABC):
     
@@ -32,4 +33,8 @@ class Cost(ABC):
         
         Does not modify the current instance but creates a new instance
         """
+        raise NotImplementedError()
+    
+    @abstractmethod
+    def sub_costs(self) -> List["Cost"]:
         raise NotImplementedError()
