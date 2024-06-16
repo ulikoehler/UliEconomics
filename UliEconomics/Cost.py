@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 from abc import ABC, abstractmethod
 import pandas as pd
+from .Interval import Interval
 
 class Cost(ABC):
     
     @abstractmethod
-    def in_period(self, start: pd.Timestamp, end: pd.Timestamp) -> float:
+    def cost_in_interval(self, interval: Interval) -> float:
         """
         Get the sum of account changes from this cost in the period
         from [start, end).

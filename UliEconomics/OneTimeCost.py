@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from .Cost import Cost
 import pandas as pd
+from .Interval import Interval
 
 class OneTimeCost(Cost):
     """
@@ -23,7 +24,6 @@ class OneTimeCost(Cost):
                            currency=self.currency)
     
     def shift(self, timedelta: pd.Timedelta) -> None:
-        # For continous costs, the time shift has no effect
         return OneTimeCost(
             self.name,
             cost=self.cost,
@@ -31,8 +31,8 @@ class OneTimeCost(Cost):
             currency=self.currency
         )
     
-    def in_period(self, start: pd.Timestamp, end: pd.Timestamp) -> float:
-        if self.timepoint >= start and self.timepoint < end:
+    def cost_in_interval(self, interval: Interval) -> float:
+        if interval.includes(self.timepoint):
             return self.cost
         else: # timepoint is outside interval
             return 0

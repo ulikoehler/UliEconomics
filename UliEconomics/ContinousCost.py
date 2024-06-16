@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from .Cost import Cost
 import pandas as pd
+from .Interval import Interval
 
 class ConstantContinousCost(Cost):
     """
@@ -32,8 +33,8 @@ class ConstantContinousCost(Cost):
         # For continous costs, the time shift has no effect
         return self.copy()
     
-    def in_period(self, start: pd.Timestamp, end: pd.Timestamp) -> float:
-        return self.cost_per_second * (end - start).total_seconds() / pd.Timedelta("1s").total_seconds()
+    def cost_in_interval(self, interval: Interval) -> float:
+        return self.cost_per_second * (interval.end - interval.start).total_seconds() / pd.Timedelta("1s").total_seconds()
     
     def monthly(self) -> float:
         return self.cost_per_second * pd.Timedelta(1, "month").total_seconds() / pd.Timedelta("1s").total_seconds()
