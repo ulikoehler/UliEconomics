@@ -13,15 +13,24 @@ class ConstantContinousCost(Cost):
         if isinstance(per, str):
             # per="month" etc
             per = pd.Timedelta(1, unit=per)
+        # Store input arguments (more or less) for copying this instance
+        self.cost = cost
+        self.per = per
         # Normalize cost to cost per second (normalize to SI units)
         self.cost_per_second = cost / per.total_seconds()
     
     def is_continous(self) -> bool:
         return True
     
-    def shift(self, num: float, unit: str) -> None:
+    def copy(self) -> "ConstantContinousCost":
+        return ConstantContinousCost(self.name,
+                                     cost=self.cost,
+                                     per=self.per,
+                                     currency=self.currency)
+    
+    def shift(self, timedelta: pd.Timedelta) -> None:
         # For continous costs, the time shift has no effect
-        pass
+        return self.copy()
     
     def in_period(self, start: pd.Timestamp, end: pd.Timestamp) -> float:
         return self.cost_per_second * (end - start).total_seconds() / pd.Timedelta("1s").total_seconds()

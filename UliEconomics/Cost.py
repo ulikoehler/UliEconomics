@@ -23,12 +23,12 @@ class Cost(ABC):
         raise NotImplementedError()
     
     @abstractmethod
-    def shift(self, num: float, unit: str) -> None:
+    def shift(self, timedelta: pd.Timedelta) -> "Cost":
         """
         Shift this cost by a given timedelta.
         Positive timedeltas shift to the future.
         Negative timedeltas shift to the past.
         
-        For some types of timedeltas, this has no effect.
+        Does not modify the current instance but creates a new instance
         """
         raise NotImplementedError()
