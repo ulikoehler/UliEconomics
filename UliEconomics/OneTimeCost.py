@@ -5,7 +5,7 @@ import pandas as pd
 class OneTimeCost(Cost):
     """
     Represents a cost which occurs exactly once at a specific point in time,
-    with the cost being transferred instantly.
+    with the entire cost being transferred instantly.
     """
     def __init__(self, name, cost: float, timepoint: pd.Timestamp, currency="€"):
         self.name = name
