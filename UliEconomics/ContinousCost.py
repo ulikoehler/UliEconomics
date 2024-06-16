@@ -14,7 +14,16 @@ class ConstantContinousCost(Cost):
         self.currency = currency
         if isinstance(per, str):
             # per="month" etc
-            per = pd.Timedelta(1, per)
+            if per == "month":
+                # TODO Use a better solution to add one "logical" year between intervals
+                # Timedelta can't handle months, so we use the average month length
+                per = pd.Timedelta(30.436875, "days") # Includes all leap year ruless
+            elif per == "year":
+                # TODO Use a better solution to add one "logical" year between intervals
+                # Timedelta can't handle years, so we use the average month length
+                per = pd.Timedelta(365.2422, "days")
+            else:
+                per = pd.Timedelta(1, per)
         # Store input arguments (more or less) for copying this instance
         self.cost = cost
         self.per = per
